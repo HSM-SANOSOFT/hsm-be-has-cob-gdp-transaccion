@@ -21,11 +21,6 @@ export class AppController {
       createdAt: new Date(),
       updateAt: new Date(),
     };
-    throw new RpcException({
-      statusCode: 501,
-      message: 'Error en la solicitud de pago',
-      data: 's',
-    });
-    //return response;
+    return response;
   }
 }
