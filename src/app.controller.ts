@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 
 import { AppService } from './app.service';
 import { SolicitudPago } from './types';
@@ -21,6 +21,11 @@ export class AppController {
       createdAt: new Date(),
       updateAt: new Date(),
     };
-    return response;
+    throw new RpcException({
+      statusCode: 501,
+      message: 'Error en la solicitud de pago',
+      data: 's',
+    });
+    //return response;
   }
 }
