@@ -1,4 +1,5 @@
 export type SolicitudPago = {
+  numDocId: string;
   infoFactura: {
     document: string;
     document_type:

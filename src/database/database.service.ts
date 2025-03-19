@@ -9,7 +9,7 @@ export class DatabaseService {
     @Inject('DATABASE_CONNECTION') private readonly dbPool: oracledb.Pool,
   ) {}
 
-  async empty() {
+  async createSolicitudPagon() {
     let connection: oracledb.Connection | null = null;
     try {
       connection = await this.dbPool.getConnection();
@@ -18,7 +18,7 @@ export class DatabaseService {
     } catch (error) {
       this.logger.error(error);
       throw new RpcException({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
         message: error as string,
       });
     } finally {

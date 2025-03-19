@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 import { AppService } from './app.service';
 import { SolicitudPago } from './types';
@@ -8,19 +8,11 @@ import { SolicitudPago } from './types';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @MessagePattern('solicitudPago')
-  getLink(
+  @MessagePattern('createSolicitudPagon')
+  async createSolicitudPagon(
     @Payload()
     payload: SolicitudPago,
   ) {
-    const response = {
-      status: 'Active',
-      token: 'chabchd015Flgfsed',
-      url: 'https://payurl.link/ZTR3638000',
-      validTo: new Date(),
-      createdAt: new Date(),
-      updateAt: new Date(),
-    };
-    return response;
+    return await this.appService.createSolicitudPagon(payload);
   }
 }
