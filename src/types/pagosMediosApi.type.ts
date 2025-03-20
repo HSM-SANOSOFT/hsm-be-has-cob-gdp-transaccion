@@ -1,4 +1,4 @@
-export type pagosMediosApi = {
+export type PagosMediosApiBody = {
   generate_invoice: 0;
   third: {
     document: string;
@@ -25,4 +25,13 @@ export type pagosMediosApi = {
   has_paypal?: 0 | 1;
   has_safetypay?: 0 | 1;
   platform_settings?: [];
+};
+
+export type PagosMediosApiResponse = {
+  success: boolean;
+  status: number;
+  data: {
+    url: string;
+    token: string;
+  };
 };
