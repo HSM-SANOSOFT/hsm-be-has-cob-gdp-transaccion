@@ -1,5 +1,4 @@
 export type SolicitudPago = {
-  numDocId: string;
   infoFactura: {
     document: string;
     document_type:
@@ -9,18 +8,23 @@ export type SolicitudPago = {
       | '08'; // Identificación del exterior
     name: string;
     email: string;
-    phone: string;
+    phones: string;
     address: string;
     type: 'Individual' | 'Company'; // Persona natural o Empresa
+    description: string;
   };
   valores: {
+    amount: number;
+    amount_with_tax: number;
     amount_without_tax: number;
     tax_value: number;
   };
   detalle: {
     tipo: string;
-    data: {
-      [key: string]: unknown;
-    };
+    compania: 'SAS' | 'CSI';
+    data: Record<string, unknown>;
+  };
+  configuracion?: {
+    notify_url?: string;
   };
 };
