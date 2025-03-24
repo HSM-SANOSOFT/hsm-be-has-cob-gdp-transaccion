@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
