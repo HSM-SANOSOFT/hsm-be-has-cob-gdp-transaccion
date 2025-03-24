@@ -20,7 +20,7 @@ export class AppController {
     payload: SolicitudPago,
   ) {
     const result = await this.appService.createSolicitudPago(payload);
-    this.logger.log('createSolicitudPago: ', result);
+    this.logger.log('createSolicitudPago: ' + JSON.stringify(result));
     return result;
   }
 }
