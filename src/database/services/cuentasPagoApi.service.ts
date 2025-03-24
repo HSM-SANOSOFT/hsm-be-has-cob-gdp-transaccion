@@ -9,13 +9,10 @@ export class CuentasPagoApiService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async create(data: CuentasPagoApiModel) {
-    console.debug(data);
     const results = await this.databaseService.execute(
       'INSERT INTO CUENTAS_PAGOS_API (CREATEAT, UPDATEAT, PROVEEDOR, TOKEN, ENLACE, COMPANIA, ESTADO, DESCRIPCION_SERVICIO, DETALLE_FACTURACION, VALIDO) VALUES (:CREATEAT, :UPDATEAT, :PROVEEDOR, :TOKEN, :ENLACE, :COMPANIA, :ESTADO, :DESCRIPCION_SERVICIO, :DETALLE_FACTURACION, :VALIDO)',
       { ...data },
     );
-
-    console.debug(results);
     return results;
   }
 

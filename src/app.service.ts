@@ -49,8 +49,8 @@ export class AppService {
         has_safetypay = true;
         break;
       case 'CSI':
-        bearerToken = envs.PAGOS_API_TOKEN_TS;
-        has_safetypay = false;
+        bearerToken = envs.PAGOS_API_TOKEN_CS;
+        has_safetypay = true;
         break;
       default:
         bearerToken = envs.PAGOS_API_TOKEN_TS;
@@ -69,6 +69,9 @@ export class AppService {
       has_de_una: 0,
       has_paypal: 0,
       has_safetypay,
+      notify_url:
+        payload.configuracion?.notify_url ||
+        'https://hospitalsm.org/v2/webhook/pagos-medios',
       platform_settings: [
         {
           platform: 'safetypay',
@@ -126,8 +129,13 @@ export class AppService {
       UPDATEAT: createAtDate,
     };
 
-    const results =
-      await this.databaseRepositories.cuentasPagoApiService.create(cuentasPago);
-    return results;
+    await this.databaseRepositories.cuentasPagoApiService.create(cuentasPago);
+
+    const response = {
+      TOKEN: token,
+      ENLACE: url,
+      VALIDO: validoDate,
+    };
+    return response;
   }
 }
