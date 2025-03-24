@@ -8,7 +8,7 @@ export type SolicitudPago = {
       | '08'; // Identificación del exterior
     name: string;
     email: string;
-    phone: string;
+    phones: string;
     address: string;
     type: 'Individual' | 'Company'; // Persona natural o Empresa
     description: string;
@@ -21,6 +21,7 @@ export type SolicitudPago = {
   };
   detalle: {
     tipo: string;
+    compania: 'SAS' | 'HSM';
     data: Record<string, unknown>;
   };
   configuracion?: {

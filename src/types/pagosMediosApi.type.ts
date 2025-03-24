@@ -1,15 +1,12 @@
 export type PagosMediosApiBody = {
+  integration: true;
   generate_invoice: 0;
   third: {
     document: string;
-    document_type:
-      | '04' // RUC
-      | '05' // Cédula ecuatoriana
-      | '06' // Pasaporte
-      | '08'; // Identificación del exterior
+    document_type: '04' | '05' | '06' | '08'; // RUC|Cédula ecuatoriana|Pasaporte|Identificación del exterior
     name: string;
     email: string;
-    phone: string;
+    phones: string;
     address: string;
     type: 'Individual' | 'Company'; // Persona natural o Empresa
   };
@@ -21,10 +18,20 @@ export type PagosMediosApiBody = {
   notify_url?: string;
   settings?: [];
   custome_values?: string;
-  has_card?: 0 | 1;
-  has_paypal?: 0 | 1;
-  has_safetypay?: 0 | 1;
-  platform_settings?: [];
+  has_cards: 0 | 1;
+  has_de_una: 0 | 1;
+  has_paypal: 0 | 1;
+  has_safetypay: boolean;
+  platform_settings?: [
+    {
+      platform: 'safetypay';
+      settings: Array<{
+        country_code: 'ECU';
+        channel_type: number;
+        include_all_banks: boolean;
+      }>;
+    },
+  ];
 };
 
 export type PagosMediosApiResponse = {
