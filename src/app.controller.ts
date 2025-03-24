@@ -21,5 +21,6 @@ export class AppController {
   ) {
     const result = await this.appService.createSolicitudPago(payload);
     this.logger.log('createSolicitudPago: ', result);
+    return result;
   }
 }
