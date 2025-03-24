@@ -21,7 +21,7 @@ export class AppService {
     private readonly httpService: HttpService,
   ) {}
 
-  async createSolicitudPagon(payload: SolicitudPago) {
+  async createSolicitudPago(payload: SolicitudPago) {
     const { amount_with_tax, amount_without_tax } = payload.valores;
     const tax_value = parseFloat(
       (amount_with_tax * envs.PORCENTAJE_IVA).toFixed(2),
@@ -45,12 +45,12 @@ export class AppService {
 
     switch (compania) {
       case 'SAS':
-        bearerToken = envs.PAGOS_API_TOKEN_CS;
-        has_safetypay = true;
-        break;
-      case 'HSM':
         bearerToken = envs.PAGOS_API_TOKEN_SS;
         has_safetypay = true;
+        break;
+      case 'CSI':
+        bearerToken = envs.PAGOS_API_TOKEN_TS;
+        has_safetypay = false;
         break;
       default:
         bearerToken = envs.PAGOS_API_TOKEN_TS;
@@ -117,7 +117,7 @@ export class AppService {
       COMPANIA: compania,
       TOKEN: token,
       ENLACE: url,
-      ESTADO: 'A',
+      ESTADO: 0,
       VALIDO: validoDate,
       PROVEEDOR: 'Pagos Medios',
       DESCRIPCION_SERVICIO: descripcionServicio,
@@ -126,10 +126,8 @@ export class AppService {
       UPDATEAT: createAtDate,
     };
 
-    console.log(cuentasPago);
-
-    const results = cuentasPago;
-    //await this.databaseRepositories.cuentasPagoApiService.create();
+    const results =
+      await this.databaseRepositories.cuentasPagoApiService.create(cuentasPago);
     return results;
   }
 }

@@ -21,7 +21,7 @@ export type SolicitudPago = {
   };
   detalle: {
     tipo: string;
-    compania: 'SAS' | 'HSM';
+    compania: 'SAS' | 'CSI';
     data: Record<string, unknown>;
   };
   configuracion?: {

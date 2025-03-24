@@ -8,11 +8,11 @@ import { SolicitudPago } from './types';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @MessagePattern('createSolicitudPagon')
-  async createSolicitudPagon(
+  @MessagePattern('createSolicitudPago')
+  async createSolicitudPago(
     @Payload()
     payload: SolicitudPago,
   ) {
-    return await this.appService.createSolicitudPagon(payload);
+    return await this.appService.createSolicitudPago(payload);
   }
 }

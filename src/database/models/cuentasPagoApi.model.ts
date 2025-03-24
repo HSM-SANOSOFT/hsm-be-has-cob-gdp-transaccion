@@ -6,8 +6,8 @@ export class CuentasPagoApiModel {
     public PROVEEDOR: string,
     public TOKEN: string,
     public ENLACE: string,
-    public COMPANIA: 'SAS' | 'HSM',
-    public ESTADO: 'A' | 'I',
+    public COMPANIA: 'SAS' | 'CSI',
+    public ESTADO: 0 | 1 | 2 | 3, // 0: Generado, 1: Enviado, 2: Pagado, 3: Facturado
     public DESCRIPCION_SERVICIO: string,
     public VALIDO: Date,
     public NUMERO?: string,

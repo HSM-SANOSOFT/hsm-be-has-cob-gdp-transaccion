@@ -1,16 +1,22 @@
 import { Injectable, Logger } from '@nestjs/common';
 
 import { DatabaseService } from '../database.service';
+import { CuentasPagoApiModel } from '../models';
 
 @Injectable()
 export class CuentasPagoApiService {
   private readonly logger = new Logger();
   constructor(private readonly databaseService: DatabaseService) {}
 
-  async create() {
+  async create(data: CuentasPagoApiModel) {
+    console.debug(data);
     const results = await this.databaseService.execute(
-      'SELECT * FROM CUENTAS_PAGOS_API',
+      'INSERT INTO CUENTAS_PAGOS_API (CREATEAT, UPDATEAT, PROVEEDOR, TOKEN, ENLACE, COMPANIA, ESTADO, DESCRIPCION_SERVICIO, DETALLE_FACTURACION, VALIDO) VALUES (:CREATEAT, :UPDATEAT, :PROVEEDOR, :TOKEN, :ENLACE, :COMPANIA, :ESTADO, :DESCRIPCION_SERVICIO, :DETALLE_FACTURACION, :VALIDO)',
+      { ...data },
     );
+
+    console.debug(results);
+    return results;
   }
 
   async update() {
