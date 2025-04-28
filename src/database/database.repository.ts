@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { CuentasPagoApiService } from './services';
+import { CuentasPagoApiService } from './repositories';
 
 @Injectable()
-export class DatabaseRepositories {
+export class DatabaseRepository {
   constructor(public cuentasPagoApiService: CuentasPagoApiService) {}
 }

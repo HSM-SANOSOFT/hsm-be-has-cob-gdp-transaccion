@@ -5,7 +5,7 @@ import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
 
 import { envs } from './config';
-import { DatabaseRepositories } from './database/database.repository';
+import { DatabaseRepository } from './database/database.repository';
 import { CuentasPagoApiModel } from './database/models';
 import {
   PagosMediosApiBody,
@@ -17,7 +17,7 @@ import {
 export class AppService {
   private readonly logger = new Logger();
   constructor(
-    private readonly databaseRepositories: DatabaseRepositories,
+    private readonly databaseRepository: DatabaseRepository,
     private readonly httpService: HttpService,
   ) {}
 
@@ -45,18 +45,22 @@ export class AppService {
 
     switch (compania) {
       case 'SAS':
+        this.logger.log('SAS');
         bearerToken = envs.PAGOS_API_TOKEN_SS;
         has_safetypay = true;
         break;
       case 'CSI':
+        this.logger.log('CSI');
         bearerToken = envs.PAGOS_API_TOKEN_CS;
         has_safetypay = true;
         break;
       default:
+        this.logger.log('default');
         bearerToken = envs.PAGOS_API_TOKEN_TS;
         has_safetypay = false;
         break;
     }
+    this.logger.debug(`Bearer Token: ${bearerToken}`);
 
     const pagosMediosApiBody: PagosMediosApiBody = {
       integration: true,
@@ -100,10 +104,10 @@ export class AppService {
         })
         .pipe(
           catchError((error: AxiosError) => {
-            this.logger.error(error.response?.data);
+            this.logger.error(JSON.stringify(error.cause || error.message));
             throw new RpcException({
-              statusCode: error.response?.status,
-              message: error.response?.data || 'Unknown error',
+              statusCode: error.status,
+              message: error.cause || error.message,
             });
           }),
         ),
@@ -129,7 +133,7 @@ export class AppService {
       UPDATEAT: createAtDate,
     };
 
-    await this.databaseRepositories.cuentasPagoApiService.create(cuentasPago);
+    await this.databaseRepository.cuentasPagoApiService.create(cuentasPago);
 
     const response = {
       TOKEN: token,
