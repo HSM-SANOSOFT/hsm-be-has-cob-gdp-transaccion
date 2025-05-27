@@ -47,16 +47,16 @@ export class AppService {
       case 'SAS':
         this.logger.log('SAS');
         bearerToken = envs.PAGOS_API_TOKEN_SS;
-        has_safetypay = true;
+        has_safetypay = false;
         break;
       case 'CSI':
         this.logger.log('CSI');
         bearerToken = envs.PAGOS_API_TOKEN_CS;
-        has_safetypay = true;
+        has_safetypay = false;
         break;
       default:
         this.logger.log('default');
-        bearerToken = envs.PAGOS_API_TOKEN_TS;
+        bearerToken = envs.PAGOS_API_TOKEN_SS;
         has_safetypay = false;
         break;
     }

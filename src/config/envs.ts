@@ -10,7 +10,6 @@ interface EnvVars {
 
   PORCENTAJE_IVA: number;
   PAGOS_API_URL: string;
-  PAGOS_API_TOKEN_TS: string;
   PAGOS_API_TOKEN_SS: string;
   PAGOS_API_TOKEN_CS: string;
 }
@@ -25,7 +24,6 @@ const envsSchema = joi
     PORCENTAJE_IVA: joi.number().default(0.15),
 
     PAGOS_API_URL: joi.string().required(),
-    PAGOS_API_TOKEN_TS: joi.string().required(),
     PAGOS_API_TOKEN_SS: joi.string().required(),
     PAGOS_API_TOKEN_CS: joi.string().required(),
   })
@@ -49,7 +47,6 @@ export const envs = {
   PORCENTAJE_IVA: envVars.PORCENTAJE_IVA,
 
   PAGOS_API_URL: envVars.PAGOS_API_URL,
-  PAGOS_API_TOKEN_TS: envVars.PAGOS_API_TOKEN_TS,
   PAGOS_API_TOKEN_SS: envVars.PAGOS_API_TOKEN_SS,
   PAGOS_API_TOKEN_CS: envVars.PAGOS_API_TOKEN_CS,
 };
